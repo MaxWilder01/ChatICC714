@@ -1,25 +1,21 @@
 package com.example.earosb.chaticc714
 
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mDatabase: DatabaseReference? = null
     private var mMessageReferencia: DatabaseReference? = null
-    private var rv = null //findViewById<RecyclerView>(R.id.recyclerView1)
+    private var rv = null
     private var mensajes: ArrayList<Mensaje>? = null
 
     private val TAG = "ChatActivity"
@@ -35,20 +31,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         escucharMensajes()
 
-//        rv = recyclerView1
         recyclerView1.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         mensajes = ArrayList<Mensaje>()
-//        mensajes!!.add(Mensaje("Paul"))
-//        mensajes.add(Mensaje("Jane"))
-//        mensajes.add(Mensaje("John"))
 
         var adapter = MensajeAdapter(mensajes!!)
         recyclerView1.adapter = adapter
     }
 
-    /**
-     *
-     */
     override fun onClick(view: View?) {
         val i = view!!.id
 
