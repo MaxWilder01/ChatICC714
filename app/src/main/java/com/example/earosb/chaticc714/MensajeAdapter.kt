@@ -10,12 +10,12 @@ class MensajeAdapter(val mensajeList: ArrayList<Mensaje>): RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.msjBody?.text = mensajeList[position].body
-
+        holder?.txtHora?.text = mensajeList[position].hora
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.mensaje_layout, parent, false)
-        return ViewHolder(v);
+        return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {
@@ -24,6 +24,7 @@ class MensajeAdapter(val mensajeList: ArrayList<Mensaje>): RecyclerView.Adapter<
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val msjBody = itemView.findViewById<TextView>(R.id.msjBody)
+        val txtHora = itemView.findViewById<TextView>(R.id.txtHora)
     }
 
 }

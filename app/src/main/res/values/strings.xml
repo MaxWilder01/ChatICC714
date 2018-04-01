@@ -19,4 +19,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="registro_de_usuario">Registro de usuario</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="apellido">Apellido</string>
+    <string name="nombre">Nombre</string>
+    <string name="chatfirebase">ChatFirebase</string>
 </resources>

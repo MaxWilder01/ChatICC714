@@ -1,14 +1,17 @@
 package com.example.earosb.chaticc714
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.mensaje_layout.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mDatabase = FirebaseDatabase.getInstance().reference
         mMessageReferencia = FirebaseDatabase.getInstance().getReference("mensajes")
 
+        msjBody?.setOnClickListener(this)
         btnEnviar.setOnClickListener(this)
 
         escucharMensajes()
@@ -43,17 +47,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         when (i) {
             R.id.btnEnviar -> {
-                enviarMensaje(txtMensaje.text.toString())
+                enviarMensaje(txtMensaje.text.toString(), getHora())
+                Toast.makeText(this, "Enviado", Toast.LENGTH_LONG).show()
                 txtMensaje.setText("")
             }
+            R.id.msjBody -> Toast.makeText(this, "Funciona", Toast.LENGTH_LONG).show()
         }
     }
+
+    private fun getHora() = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toString() + ":" + Calendar.getInstance().get(Calendar.MINUTE).toString()
+
 
     /**
      * Envía mensaje a base de datos firebase
      */
-    private fun enviarMensaje(mensaje: String) {
-        val msj = Mensaje(mensaje);
+    private fun enviarMensaje(mensaje: String, hora: String) {
+        val msj = Mensaje(mensaje, hora);
         mMessageReferencia!!.push().setValue(msj)
     }
 
